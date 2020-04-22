@@ -24,3 +24,17 @@ after_success:
   - docker push killer1987v/multi-nginx
   - docker push killer1987v/multi-server
   - docker push killer1987v/multi-worker
+
+deploy:
+  edge: "true"
+  provider: elasticbeanstalk
+  app: Multi-docker
+  env: MultiDocker-env
+  region: ap-south-1
+  bucket-name: elasticbeanstalk-ap-south-1-023868447130
+  bucket-path: Multi-docker
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+
