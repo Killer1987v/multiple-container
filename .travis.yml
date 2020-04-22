@@ -1,0 +1,25 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t killer1987v/client-react-test -f ./client/Dockerfile.dev ./client
+
+scripts:
+  - docker run killer1987v/client-react-test npm test -- --coverage
+
+after_success:
+  - docker build -t killer1987v/multi-client ./client
+  - docker build -t killer1987v/multi-nginx ./nginx
+  - docker build -t killer1987v/multi-server ./server
+  - docker build -t killer1987v/multi-worker ./worker
+
+  ## to login to docker hub
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin
+
+  ## to push the images in docker hub
+  - docker push killer1987v/multi-client
+  - docker push killer1987v/multi-nginx
+  - docker push killer1987v/multi-server
+  - docker push killer1987v/multi-worker
