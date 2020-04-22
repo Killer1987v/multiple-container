@@ -15,7 +15,7 @@ after_success:
   - docker build -t killer1987v/multi-server ./server
   - docker build -t killer1987v/multi-worker ./worker
 
-  ## to login to docker hub
+  ## to login to docker hub---
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin
 
   ## to push the images in docker hub
