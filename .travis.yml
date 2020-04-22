@@ -3,6 +3,7 @@ sudo: required
 services:
   - docker
 
+  ## to build dev and test only react scripts as we dont have test scripts for other modules
 before_install:
   - docker build -t killer1987v/client-react-test -f ./client/Dockerfile.dev ./client
 
